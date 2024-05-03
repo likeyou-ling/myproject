@@ -1,4 +1,5 @@
-import { request } from "./request";
+import { httpRequest } from "./request";
+import { _setToken, _getToken, removeToken } from "./token";
 
 // export all requests
-export { request };
+export { httpRequest, _setToken, _getToken, removeToken };

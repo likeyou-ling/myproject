@@ -1,14 +1,25 @@
 import React from "react"
 import logo from "@/assests/logo.png"
-import { Button, Card, Form, Input } from "antd"
+import { Button, Card, Form, Input, message } from "antd"
 import './index.scss'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGetToken } from '@/store/modules/user';
+import { useNavigate } from "react-router-dom";
 
 /** Login component */
 export default function Login() {
+    const dispatch = useDispatch();
+    const { token } = useSelector((state) => state.userReducer);
+    const navigate = useNavigate();
     /** submit user input params */
-    const onFinish = (values) => {
-        console.log('Success:', values);
+    const onFinish = async (values) => {
+        await dispatch(fetchGetToken(values));
+        if (token) {
+            navigate('/layout');
+            message.success("login success");
+        }
     };
+    /** failed to send input params */
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -22,9 +33,9 @@ export default function Login() {
                     validateTrigger="onBlur"
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
-                    >
+                >
                     <Form.Item
-                        name="userPhone"
+                        name="mobile"
                         rules={[
                             {
                                 required: true,
@@ -38,7 +49,7 @@ export default function Login() {
                         <Input size="large" placeholder="请输入您的手机号码" />
                     </Form.Item>
                     <Form.Item
-                        name="vertiCode"
+                        name="code"
                         rules={[
                             {
                                 required: true,

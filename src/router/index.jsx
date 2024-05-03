@@ -1,6 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import Layout from "@/pages/layout/Layout";
 import Login from "@/pages/login/Login";
+import AuthRoute from "@/components/AuthRoute";
 
 /**
  * create rouer rules
@@ -8,7 +9,11 @@ import Login from "@/pages/login/Login";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Layout />
+        element: <Navigate to="/login"></Navigate>
+    },
+    {
+        path: "/layout",
+        element: <AuthRoute><Layout /></AuthRoute>
     },
     {
         path: "/login",
