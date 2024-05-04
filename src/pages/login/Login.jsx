@@ -15,7 +15,7 @@ export default function Login() {
     const onFinish = async (values) => {
         await dispatch(fetchGetToken(values));
         if (token) {
-            navigate('/layout');
+            navigate('/layout/home');
             message.success("login success");
         }
     };
