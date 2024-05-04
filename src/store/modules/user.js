@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { httpRequest } from "@/utils";
 import { _setToken, _getToken } from "@/utils";
 import { _removeToken } from "@/utils";
+import { getUserInfoAPI, getLoginAPI } from "@/apis/user";
 
 const userInfo = createSlice({
   name: "user",
@@ -39,7 +39,7 @@ const userReducer = userInfo.reducer;
 const fetchGetToken = (login) => {
   return async (dispatch) => {
     // sendrequest
-    const res = await httpRequest.post("/authorizations", login);
+    const res = await getLoginAPI(login);
     // use synchronize action
     dispatch(setToken(res.data.token));
   };
@@ -48,7 +48,7 @@ const fetchGetToken = (login) => {
 const fetchUserInfoAsync = () => {
   return async (dispatch) => {
     // sendrequest
-    const res = await httpRequest.get("/user/profile");
+    const res = await getUserInfoAPI();
     // use synchronize action
     dispatch(fetchUserInfo(res.data));
   };

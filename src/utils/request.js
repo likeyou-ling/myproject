@@ -1,5 +1,7 @@
 import axios from "axios";
 import { _getToken } from "./token";
+import { clearUserInfo } from "@/store/modules/user";
+import router from "@/router";
 const httpRequest = axios.create({
   baseURL: "http://geek.itheima.net/v1_0",
   timeout: 5000,
@@ -22,6 +24,12 @@ httpRequest.interceptors.response.use(
   },
   (error) => {
     // status code not in 2XX
+    if (error.response.status === 401) {
+      // need to login
+      clearUserInfo();
+      router.navigate("/login");
+      window.location.reload();
+    }
     return Promise.reject(error);
   }
 );
