@@ -10,11 +10,13 @@ import 'normalize.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>
+  </React.Fragment>
+  // </React.StrictMode>
 );
 
 reportWebVitals();

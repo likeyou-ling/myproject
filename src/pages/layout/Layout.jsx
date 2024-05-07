@@ -53,7 +53,7 @@ export default function _Layout() {
   // opera user info for asynchronize
   useEffect(() => {
     dispatch(fetchUserInfoAsync())
-  }, [])
+  }, [dispatch])
 
   // get current route path
   const location = useLocation();

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts';
 
 export default function BarChr(props) {
-    const homeRef = useRef();
+    const homeRef = useRef(null);
     useEffect(() => {
         const chartDom = homeRef.current;
         const myChart = echarts.init(chartDom);
